@@ -36,7 +36,7 @@ for col in train_df.columns[2:]:
         # do the log transform
         log_train_df[short_name] = np.log10(log_train_df[short_name] * multiplier)
 
-log_train_df.to_csv("data/log_train_data.csv",index=False)
+log_train_df.to_csv("log_train_data.csv",index=False)
 
 log_train_df.sample(frac=1.0)
 cv = KFold(n_splits=10, shuffle=True, random_state=42)
@@ -45,8 +45,8 @@ fold_number = 1
 for train_index, test_index in cv.split(log_train_df):
     tr_df = log_train_df.iloc[train_index]
     te_df = log_train_df.iloc[test_index]
-    os.mkdir(f"data/fold_{fold_number}")
-    tr_df.to_csv(f"data/fold_{fold_number}/train.csv", index=False)
-    te_df.to_csv(f"data/fold_{fold_number}/test.csv", index=False)
+    os.mkdir(f"fold_{fold_number}")
+    tr_df.to_csv(f"fold_{fold_number}/train.csv", index=False)
+    te_df.to_csv(f"fold_{fold_number}/test.csv", index=False)
 
     fold_number += 1
